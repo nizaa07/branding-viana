@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+
+    <link href="/dist/output.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/4f0868411f.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@500&family=Ubuntu:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-database.js"></script>
+
+    <link rel="stylesheet" href="assets/styles/style.css" />
+    <!-- Jquery -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <!-- Hls Video JS -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+    <!-- Font awesome -->
+    <script
+      src="https://kit.fontawesome.com/4f0868411f.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Tailwind CSS -->
+    <link href="/dist/output.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="/assets//icons//Logo_Viana.png"
+    />
+    <title>VIANA | Video Analytics with Artificial Intelligence</title>
+  </head>
+
+  <body class="bg-black">
+    <nav class="block lg:hidden md:hidden">
+      <div id="buttonMobile" class="absolute m-2">
+        <svg
+          class="fill-white"
+          xmlns="http://www.w3.org/2000/svg"
+          height="1.5em"
+          viewBox="0 0 448 512"
+        >
+          <path
+            d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3
+                     32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"
+          />
+        </svg>
+      </div>
+      <ul id="menuMobile" class="min-h-screen bg-neutral-400 hidden text-white">
+        <div id="closeButton" class="mb-8 p-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="1.5em"
+            viewBox="0 0 384 512"
+            class="fill-white"
+          >
+            <path
+              d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 
+                        361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+            />
+          </svg>
+        </div>
+        <li class="text-3xl">Viana Smart Transportation</li>
+        <div class="border-b-2 border-gray-600 w-full relative my-2"></div>
+        <li class="text-3xl">Viana Smart Building</li>
+        <div class="border-b-2 border-gray-600 w-full relative my-2"></div>
+        <li class="text-3xl">Viana Smart Social</li>
+        <div class="border-b-2 border-gray-600 w-full relative my-2"></div>
+        <li class="text-3xl">Viana Smart Healthcare</li>
+        <div class="border-b-2 border-gray-600 w-full relative my-2"></div>
+      </ul>
+    </nav>
+    <nav
+      id="navbar"
+      class="h-[10vh] flex text-white p-2 p-4 hidden lg:block md:block top-0 sticky z-50"
+    >
+      <div class="w-[85%] flex justify-between m-auto relative">
+        <a href="#hero">
+          <img
+            class="w-[10vw] h-[7vh] object-contain"
+            src=" assets/icons/Logo-Viana.png"
+            alt="Logo"
+          />
+        </a>
+        <ul class="flex flex-row gap-x-5 my-auto font-semibold 2xl:text-xl">
+          <a href="#products">
+            <li>Our Product</li>
+          </a>
+
+          <li id="actionMenu" class="cursor-pointer flex drop-shadow-2xl">
+            Data Analytic
+            <svg
+              class="ml-1 my-auto fill-white"
+              xmlns="http://www.w3.org/2000/svg"
+              height="1em"
+              viewBox="0 0 448 512"
+            >
+              <path
+                d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
+              />
+            </svg>
+          </li>
+          <li>
+            <a href="#footer"> About US </a>
+          </li>
+        </ul>
+        <ul
+          id="listMenu"
+          class="rounded font-medium text-black absolute right-[90px] 2xl:right-[100px] top-10 2xl:top-12 2xl:text-xl bg-neutral-200 p-2 hidden"
+        >
+          <li class="p-1 rounded hover:bg-white hover:drop-shadow">
+            Viana Smart Transportation
+          </li>
+          <div class="border-b-2 border-gray-400 w-full relative my-2"></div>
+          <li class="p-1 rounded hover:bg-white hover:drop-shadow">
+            Viana Smart Building
+          </li>
+          <div class="border-b-2 border-gray-400 w-full relative my-2"></div>
+          <li class="p-1 rounded hover:bg-white hover:drop-shadow">
+            Viana Smart Social
+          </li>
+          <div class="border-b-2 border-gray-400 w-full relative my-2"></div>
+          <li class="p-1 rounded hover:bg-white hover:drop-shadow">
+            Viana Smart Healthcare
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <section
+      id="hero"
+      class="w-full flex items-center w-full min-h-screen lg:mt-[-10vh]"
+    >
+      <video
+        autoplay
+        muted
+        loop
+        class="z-[-1] absolute inset-x-0 min-h-full lg:max-h-full min-w-full object-cover brightness-50"
+      >
+        <source src="assets/video/Transportasi-Naripan.mp4" type="video/mp4" />
+      </video>
+      <div
+        class="pl-12 h-[60vh] lg:w-[80%] md:w-[80%] w-full mx-auto flex justify-between absolute"
+      >
+        <div class="lg:w-[40vw] md:w-[40vw] p-4 my-12 space-y-4 text-white">
+          <p class="font-primary text-white text-6xl 2xl:text-8xl">VIANA</p>
+          <p class="font-primary text-4xl 2xl:text-5xl">
+            Video Analytics With AI
+          </p>
+          <p class="text-lg">
+            An Artificial Intelligence program created to create a solution to a
+            problem that occurs based on video analytics.
+          </p>
+          <a href="#products">
+            <button
+              class="rounded-lg px-8 py-2 hover:bg-red-800 bg-red-600 w-fit mt-4 lg:text-xl"
+            >
+              Order Now
+            </button>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="flex bg-black text-white pt-16 2xl:px-32">
+      <div
+        class="lg:w-[75%] md:w-[75%] flex flex-col gap-16 w-full lg:p-0 md:p-0 p-2 mx-auto"
+      >
+        <div class="relative m-12">
+          <div class="flex items-center lg:flex-row md:flex-row flex-col">
+            <div
+              class="rounded rounded-xl bg-red-300 lg:w-[30vw] md:w-[30vw] xl:h-[40vh]"
+            >
+              <video
+                autoplay
+                muted
+                loop
+                class="rounded rounded-xl min-h-[40vh] object-fill min-w-[30vw]"
+              >
+                <source src="assets/video/Crword1.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div
+              class="lg:ml-8 md:ml-8 ml-0 flex flex-col gap-4 text-center lg:text-left md:text-left space-y-2 2xl:w-[50%]"
+            >
+              <h2 class="lg:text-3xl 2xl:text-4xl font-semibold tracking-wider">
+                Real Time Solutions
+              </h2>
+              <p class="lg:text-xl 2xl:text-2xl w-3/4">
+                VIANA is able to provide solution recommendations quickly to
+                detect and predict problems in real time.
+              </p>
+            </div>
+          </div>
+          <div
+            class="border-b-2 border-white lg:w-[40vw] md:w-[40vw] lg:relative lg:float-right 2xl:top-8 2xl:left-8 md:absolute relative lg:right-1.5 md:right-1.5 mt-8"
+          ></div>
+        </div>
+        <div class="relative mx-12">
+          <div
+            class="flex items-center lg:gap-16 lg:flex-row md:flex-row flex-col"
+          >
+            <div
+              class="rounded rounded-xl bg-red-300 lg:w-[30vw] md:w-[30vw] xl:h-[40vh] lg:order-2"
+            >
+              <video
+                autoplay
+                muted
+                loop
+                class="min-h-[40vh] object-cover min-w-[30vw] rounded rounded-xl"
+              >
+                <source
+                  src="assets/video/Plat(Building).mp4"
+                  type="video/mp4"
+                />
+              </video>
+            </div>
+            <div
+              class="lg:ml-8 md:ml-8 ml-0 flex flex-col gap-4 text-center lg:text-left md:text-left space-y-2 2xl:w-[50%]"
+            >
+              <h2 class="lg:text-3xl 2xl:text-4xl font-semibold tracking-wider">
+                Object Identification
+              </h2>
+              <p class="lg:text-xl 2xl:text-2xl">
+                VIANA is able to detect object, behaviour, and anomalies to make
+                it easier to draw conclusions from the solutions that VIANA has
+                produced
+              </p>
+            </div>
+          </div>
+          <div
+            class="border-b-2 border-white lg:w-[40vw] md:w-[40vw] lg:relative lg:float-left 2xl:top-8 2xl:left-8 md:absolute relative lg:right-1.5 md:right-1.5 mt-8"
+          ></div>
+        </div>
+        <div class="relative mx-12">
+          <div class="flex items-center lg:flex-row md:flex-row flex-col">
+            <div
+              class="rounded rounded-xl bg-red-300 lg:w-[30vw] md:w-[30vw] xl:h-[40vh]"
+            >
+              <video
+                autoplay
+                muted
+                loop
+                class="rounded rounded-xl min-h-[40vh] object-cover min-w-[30vw]"
+              >
+                <source
+                  src="assets/video/dashboard_viana.mp4"
+                  type="video/mp4"
+                />
+              </video>
+            </div>
+            <div
+              class="lg:ml-8 md:ml-8 ml-0 flex flex-col gap-4 text-center lg:text-left md:text-left space-y-2 2xl:w-[50%]"
+            >
+              <h2 class="lg:text-3xl 2xl:text-4xl font-semibold tracking-wider">
+                Analytics Dashboard
+              </h2>
+              <p class="lg:text-xl 2xl:text-2xl">
+                Informative visualization in graphic form to facilitate camera
+                management and making decisions based on VIANA recommendations.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="bg-black flex py-24">
+      <div class="flex flex-row m-auto gap-2">
+        <div class="w-[20px] h-[20px] bg-white rounded-full"></div>
+        <div class="border-b-2 border-white w-[40vw] my-auto"></div>
+        <div class="w-[20px] h-[20px] bg-white rounded-full"></div>
+      </div>
+    </div>
+
+    <section
+      id="products"
+      class="pt-12 flex flex-col gap-16 items-center bg-black pb-24"
+    >
+      <div
+        class="grid lg:grid-cols-3 md:grid-cols-3 grid-cols-1 gap-x-4 gap-y-8 lg:w-[80%] md:w-[80%] w-full lg:mx-auto md:mx-auto mx-0 p-2 lg:p-0 md:p-0"
+      >
+        <div
+          class="bg-red-600 lg:w-[22vw] md:w-[22vw] w-full lg:min-h-[60vh] md:min-h-[60vh] min-h-[10vh] flex flex-col pb-8"
+        >
+          <div class="bg-red-200 h-[30vh]">
+            <img src="" alt="" />
+          </div>
+          <div
+            class="text-center my-8 space-y-4 p-4 text-left [&>p]:text-left lg:[&>p]:text-xl text-white"
+          >
+            <h2 class="text-3xl 2xl:text-4xl font-semibold tracking-wide">
+              Free Trial
+            </h2>
+            <p>Include</p>
+            <p>1. One Analiytics Video Streams</p>
+            <p>2. Analytics Dashboard up to 500 counting data</p>
+            <p>3. One AI feature</p>
+          </div>
+          <div class="flex flex-col justify-center gap-4">
+            <p
+              class="text-2xl 2xl:text-4xl font-semibold tracking-wide text-center text-white"
+            >
+              Rp.5 Million
+            </p>
+            <a
+              href="https://wa.me/082111666482"
+              class="hover:bg-slate-300 bg-white text-black font-semibold rounded-md text-lg 2xl:text-xl p-2 mx-auto my-2"
+              >Contact us</a
+            >
+          </div>
+        </div>
+
+        <div
+          class="bg-red-600 lg:w-[22vw] md:w-[22vw] w-full lg:min-h-[60vh] md:min-h-[60vh] min-h-[10vh] flex flex-col"
+        >
+          <div class="bg-red-200 h-[30vh]">
+            <img src="" alt="" />
+          </div>
+          <div
+            class="text-center 2xl:my-8 mt-8 mb-3 space-y-4 p-4 text-left [&>p]:text-left lg:[&>p]:text-xl text-white"
+          >
+            <h2 class="text-3xl 2xl:text-4xl font-semibold tracking-wide">
+              Subscription
+            </h2>
+            <p>Include</p>
+            <p>1. One Analytics Video streams</p>
+            <p>2. Analytics Dashboard with unlimited counting data</p>
+            <p>3. One AI feature</p>
+          </div>
+          <div class="flex flex-col justify-center gap-4">
+            <p
+              class="text-2xl 2xl:text-4xl font-semibold tracking-wide text-center text-white"
+            >
+              Rp.2 Million / month
+            </p>
+            <a
+              href="https://wa.me/082111666482"
+              class="hover:bg-slate-300 bg-white text-black font-semibold rounded-md text-lg 2xl:text-xl p-2 mx-auto my-2"
+              >Contact us</a
+            >
+          </div>
+        </div>
+
+        <div
+          class="bg-red-600 lg:w-[22vw] md:w-[22vw] w-full lg:min-h-[60vh] md:min-h-[60vh] min-h-[10vh] flex flex-col"
+        >
+          <div class="bg-red-200 h-[30vh]">
+            <img src="" alt="" />
+          </div>
+          <div
+            class="text-center my-8 space-y-4 p-4 text-left [&>p]:text-left lg:[&>p]:text-xl text-white"
+          >
+            <h2 class="text-3xl 2xl:text-4xl font-semibold tracking-wide">
+              Camera Analytics
+            </h2>
+            <p>Include</p>
+            <p>1. One Camera</p>
+            <p>2. Analytics Dashboard up to 500 counting data</p>
+            <p>3. One AI feature</p>
+          </div>
+          <div class="flex flex-col justify-center gap-4">
+            <p
+              class="text-2xl 2xl:text-4xl font-semibold tracking-wide text-center text-white"
+            >
+              Rp.12 Million
+            </p>
+            <a
+              href="https://wa.me/082111666482"
+              class="hover:bg-slate-300 bg-white text-black font-semibold rounded-md text-lg 2xl:text-xl p-2 mx-auto my-2"
+              >Contact us</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded p-1">
+        <video
+          controls
+          loop
+          class="lg:min-h-[40vh] object-cover lg:min-w-[30vw]"
+        >
+          <source
+            src="assets/video/Viana Full With Sound Rev1.mp4"
+            type="video/mp4"
+          />
+        </video>
+      </div>
+    </section>
+    <footer
+      id="footer"
+      class="bg-gray-300 w-full pt-16 p-4 lg:h-[50vh] md:h-[50vh] h-[70vh] 2xl:h-[40vh] 2xl:pt-12 xl:pt-24 2xl:text-xl text-lg"
+      style="
+        -webkit-clip-path: polygon(0 0, 100% 20%, 100% 100%, 0% 100%);
+        clip-path: polygon(0 0, 100% 20%, 100% 100%, 0% 100%);
+      "
+    >
+      <div
+        class="lg:flex lg:justify-between md:justify-between lg:flex-row 2xl:mt-16 flex flex-col lg:gap-y-0 md:gap-y-0 gap-y-12 lg:gap-y-4 lg:py-6 lg:px-6 md:px-4 px-0 py-0"
+      >
+        <div class="w-[30vw] w-[20vw] lg:w-[10vw] lg:h-[5vh]">
+          <img
+            class="w-[30vw] w-[20vw] lg:w-[10vw] lg:h-[7vh] object-contain"
+            src=" assets/icons/Logo-Viana.png"
+            alt="Logo"
+          />
+        </div>
+        <div class="">
+          <a href="#">Contact Us</a>
+          <ul>
+            <li>cs@layanancerdas.id</li>
+            <li>0821-1166-6482</li>
+          </ul>
+        </div>
+        <div class="">
+          <p>About VIANA</p>
+        </div>
+        <div class="">
+          <p>
+            Jl. Trunojoyo No. 11 Citarum Kec. Bandung Wetan, <br />
+            Kota Bandung Jawa Barat 40115
+          </p>
+          <div class="flex flex-row gap-x-2 mt-2 lg:mt-0 md:mt-0">
+            <div class="">
+              <img src="assets//icons//LinkedIn.png" alt="" />
+            </div>
+            <div class="">
+              <img src="assets//icons//Telegram.png" alt="" />
+            </div>
+            <div class="">
+              <img src="assets//icons//Facebook.png" alt="" />
+            </div>
+            <div class="">
+              <img src="assets//icons//Instagram.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js"></script>
+    <script src="<?= base_url('assets/js/jquery.js') ?>"></script>
+    <script src="<?= base_url('assets/js/script.js') ?>"></script>
+
+    <!-- Lottie Video -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  </body>
+
+  <script>
+    let a = $('#navbar').offset().top;
+
+    $(document).scroll(function () {
+      if ($(this).scrollTop() > screen.height - 275) {
+        $('#navbar').css({
+          'background': 'rgba(0, 0, 0, 1)',
+          'border-bottom': 'hidden',
+          'box-shadow': '0 4px 30px rgba(0, 0, 0, 0.1)',
+          'animation': 'fadeInAnimation ease 3s',
+          '-webkit-backdrop-filter': 'blur(5.7px)',
+        });
+      } else {
+        $('#navbar').css({
+          'background': 'rgba(255, 255, 255, 0)',
+          'border-bottom': 'hidden',
+          'box-shadow': '',
+          'backdrop-filter': '0',
+          '-webkit-backdrop-filter': '0',
+        });
+      }
+    });
+    $('#actionMenu').click(function () {
+      $('#listMenu').toggle();
+    });
+    $('#buttonMobile').click(function () {
+      $('#menuMobile').show();
+      $('#buttonMobile').hide();
+      $('#closeButton').click(function () {
+        $('#menuMobile').hide();
+        $('#buttonMobile').show();
+      });
+    });
+  </script>
+</html>
